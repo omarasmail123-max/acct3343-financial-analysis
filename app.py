@@ -57,7 +57,7 @@ min_gpa=st.sidebar.slider('BUY: minimum gross profitability',0.0,0.8,0.10,0.01)
 min_fcf=st.sidebar.slider('BUY: minimum FCF yield',-0.1,0.2,0.0,0.005,format='%.3f')
 weight=st.sidebar.slider('BUY: profitability ranking weight',0,100,50,5)
 exclude_ticker=st.sidebar.text_input('Exclude your 60-second pitch ticker(s), comma-separated','').upper()
-excluded={s.strip() for s in exclude_ticker.split(',') if s.strip()}
+excluded={'CTAS'} | {s.strip() for s in exclude_ticker.split(',') if s.strip()}
 d=df[df.sector.isin(chosen)&(df.market_cap>=cap*1e9)&~df.ticker.isin(excluded)].copy()
 # Percentile thresholds recompute within the currently selected universe.
 sta_threshold=d.STA.quantile(sta_pct/100)
